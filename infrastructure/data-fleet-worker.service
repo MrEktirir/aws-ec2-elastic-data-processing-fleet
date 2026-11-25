@@ -1,0 +1,19 @@
+[Unit]
+Description=Elastic EC2 Data Processing Worker
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=ec2-user
+WorkingDirectory=/opt/data-fleet/app
+Environment="AWS_REGION=eu-central-1"
+Environment="BUCKET_NAME=<YOUR_S3_BUCKET>"
+Environment="QUEUE_URL=<YOUR_SQS_QUEUE_URL>"
+Environment="PROCESSING_DELAY=10"
+ExecStart=/opt/data-fleet/venv/bin/python /opt/data-fleet/app/src/worker.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

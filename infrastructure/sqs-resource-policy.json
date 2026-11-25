@@ -1,0 +1,31 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "OwnerAccess",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<AWS_ACCOUNT_ID>:root"
+      },
+      "Action": "SQS:*",
+      "Resource": "arn:aws:sqs:<AWS_REGION>:<AWS_ACCOUNT_ID>:<YOUR_SQS_QUEUE>"
+    },
+    {
+      "Sid": "AllowS3EventNotifications",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "s3.amazonaws.com"
+      },
+      "Action": "sqs:SendMessage",
+      "Resource": "arn:aws:sqs:<AWS_REGION>:<AWS_ACCOUNT_ID>:<YOUR_SQS_QUEUE>",
+      "Condition": {
+        "ArnEquals": {
+          "aws:SourceArn": "arn:aws:s3:::<YOUR_S3_BUCKET>"
+        },
+        "StringEquals": {
+          "aws:SourceAccount": "<AWS_ACCOUNT_ID>"
+        }
+      }
+    }
+  ]
+}

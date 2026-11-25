@@ -1,0 +1,50 @@
+{
+  "TargetValue": 10.0,
+  "DisableScaleIn": false,
+  "CustomizedMetricSpecification": {
+    "Metrics": [
+      {
+        "Id": "m1",
+        "Label": "SQS queue backlog",
+        "MetricStat": {
+          "Metric": {
+            "MetricName": "ApproximateNumberOfMessagesVisible",
+            "Namespace": "AWS/SQS",
+            "Dimensions": [
+              {
+                "Name": "QueueName",
+                "Value": "<YOUR_SQS_QUEUE>"
+              }
+            ]
+          },
+          "Stat": "Sum"
+        },
+        "ReturnData": false
+      },
+      {
+        "Id": "m2",
+        "Label": "Active EC2 workers",
+        "MetricStat": {
+          "Metric": {
+            "MetricName": "GroupInServiceInstances",
+            "Namespace": "AWS/AutoScaling",
+            "Dimensions": [
+              {
+                "Name": "AutoScalingGroupName",
+                "Value": "<YOUR_AUTO_SCALING_GROUP>"
+              }
+            ]
+          },
+          "Stat": "Average"
+        },
+        "ReturnData": false
+      },
+      {
+        "Id": "e1",
+        "Label": "Backlog per instance",
+        "Expression": "m1 / m2",
+        "ReturnData": true
+      }
+    ]
+  }
+}
