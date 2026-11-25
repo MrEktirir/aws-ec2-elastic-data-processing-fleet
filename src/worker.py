@@ -44,9 +44,9 @@ def extract_s3_locations(message):
 
     return locations
 
-def read_raw_data(buckets, key):
+def read_raw_data(bucket, key):
     response = s3.get_object(
-        Bucket = bucket,
+        Bucket=bucket,
         Key=key
     )
 
