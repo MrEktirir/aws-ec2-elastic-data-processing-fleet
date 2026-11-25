@@ -162,14 +162,14 @@ The load test was configured to generate 200,000 synthetic transaction records. 
 ```mermaid
 timeline
     title EC2 Auto Scaling Experiment - UTC
-    11:47 : Initial EC2 worker launched
-    12:07 : CloudWatch scale-out alarm triggered
+    11h47 : Initial EC2 worker launched
+    12h07 : CloudWatch scale-out alarm triggered
           : Desired capacity increased from 1 to 4
-    12:08 : Three additional EC2 launch activities completed
-    12:15 : Visible SQS backlog reached zero
-    12:16 : One EC2 instance manually terminated
+    12h08 : Three additional EC2 launch activities completed
+    12h15 : Visible SQS backlog reached zero
+    12h16 : One EC2 instance manually terminated
           : Replacement instance launched automatically
-    12:30 : CloudWatch scale-in alarm triggered
+    12h30 : CloudWatch scale-in alarm triggered
           : Capacity decreased from 4 to 3
 ```
 
